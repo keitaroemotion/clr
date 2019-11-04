@@ -1,8 +1,25 @@
 #!/usr/bin/env bash
 
 show_colour() {
-    perl -e 'foreach $a(@ARGV){print "\e[48;2;".join(";",unpack("C*",pack("H*",$a)))."m \e[49m "};print "\n"' "$@"
+    perl -e 'foreach $a(@ARGV){print "\e[48;2;".join(";",unpack("C*",pack("H*",$a)))."m \e[49m "};
+    print "\n"' "$@"
 }
+
+help() {
+    echo ""
+    echo "clr -h           .... show help menu"
+    echo "clr [hex digit]  .... show color corresponding to the hex digit"
+    echo ""
+    exit
+}
+
+if [ -z $1 ]; then
+    help
+fi
+
+if [ "$1" == "-h" ]; then
+    help
+fi
 
 show_colour $*
 
